@@ -1,24 +1,8 @@
-# README
+# Base app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+You can clone this and use it as a template for a VueJS App with a Rails API backend
 
-Things you may want to cover:
+# Features
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Rails API
+- Rails Authentication
