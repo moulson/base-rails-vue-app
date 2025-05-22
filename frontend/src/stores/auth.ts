@@ -2,12 +2,24 @@ import { defineStore } from 'pinia'
 import apiClient from '@/services/api'
 
 export const useAuthStore = defineStore('auth', {
-  state: () => ({
-    user: JSON.parse(localStorage.getItem('user')),
-    token: localStorage.getItem('token') || null,
-    isLoading: false,
-    error: null,
-  }),
+  state: () => {
+    let user = null
+    try {
+      const storedUser = localStorage.getItem('user')
+      if (storedUser) {
+        user = JSON.parse(storedUser)
+      }
+    } catch (e) {
+      console.error("Failed to parse 'user' from localStorage:", e)
+    }
+
+    return {
+      user,
+      token: localStorage.getItem('token') || null,
+      isLoading: false,
+      error: null,
+    }
+  },
 
   getters: {
     isAuthenticated: (state) => !!state.token,
