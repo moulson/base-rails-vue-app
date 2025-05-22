@@ -1,7 +1,15 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
-  <RouterView />
+  <AppLayout>
+    <!-- Your page content goes here -->
+  </AppLayout>
 </template>
+
+<script>
+import AppLayout from './components/AppLayout.vue'
+
+export default {
+  components: {
+    AppLayout,
+  },
+}
+</script>
