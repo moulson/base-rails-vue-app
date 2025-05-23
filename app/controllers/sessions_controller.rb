@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
   end
 
   def show
-    render json: { user: user }, status: :ok
+    render json: { user: Current.user }, status: :ok
   end
 
   def destroy
