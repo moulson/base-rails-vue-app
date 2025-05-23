@@ -11,7 +11,7 @@
               v-model="form.email_address"
               type="email"
               required
-              class="relative block w-full px-3 py-2 border border-gray-300 rounded-t-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              class="relative block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="Email address"
             />
           </div>
@@ -21,7 +21,7 @@
             <input
               v-model="form.display_name"
               required
-              class="relative block w-full px-3 py-2 border border-gray-300 rounded-t-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              class="relative block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="Display Name"
             />
           </div>
@@ -45,6 +45,7 @@ import { reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import apiClient from '@/services/api'
+import { toast } from 'vue-sonner'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -61,11 +62,13 @@ const updateUser = async () => {
     const response = await apiClient.put('/user', {
       user: form,
     })
-    if (response.success) {
+    if (response.status === 200) {
       console.log('updated')
+      toast.success('Profile saved!')
     }
   } catch (error) {
     console.error('Error updating profile', error)
+    toast.error('Error updating profile')
   } finally {
     loading = false
   }

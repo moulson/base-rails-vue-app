@@ -112,9 +112,7 @@
     <div class="pb-20">
       <div class="px-4 py-8">
         <div class="mx-auto max-w-7xl">
-          <Suspense>
-            <RouterView></RouterView>
-          </Suspense>
+          <RouterView></RouterView>
         </div>
       </div>
     </div>
@@ -144,6 +142,7 @@
         </button>
       </div>
     </div>
+    <Toaster></Toaster>
   </div>
 </template>
 
@@ -151,6 +150,8 @@
 import { ref, computed } from 'vue'
 import { RouterLink, RouterView, useRouter } from 'vue-router'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { Toaster } from '@/components/ui/sonner'
+import 'vue-sonner/style.css'
 import {
   Bars3Icon,
   HomeIcon,

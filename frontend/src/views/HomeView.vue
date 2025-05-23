@@ -9,7 +9,7 @@
           </div>
           <div class="flex items-center space-x-4">
             <template v-if="authStore.isAuthenticated">
-              <span class="text-gray-700">Welcome, {{ authStore.currentUser?.email }}</span>
+              <span class="text-gray-700">Welcome, {{ authStore.currentUser?.display_name }}</span>
               <router-link
                 to="/dashboard"
                 class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"

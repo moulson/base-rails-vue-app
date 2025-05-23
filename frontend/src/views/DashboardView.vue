@@ -7,7 +7,7 @@
             <h1 class="text-xl font-semibold">Dashboard</h1>
           </div>
           <div class="flex items-center space-x-4">
-            <span class="text-gray-700">Welcome, {{ authStore.currentUser?.email }}</span>
+            <span class="text-gray-700">Welcome, {{ authStore.currentUser?.display_name }}</span>
             <button
               @click="handleLogout"
               class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium"
