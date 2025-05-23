@@ -1,6 +1,6 @@
 # Base app
 
-You can clone this and use it as a template for a VueJS App with a Rails API backend
+You can use this repo as a template for a VueJS App with a Rails API backend
 
 # Features
 
