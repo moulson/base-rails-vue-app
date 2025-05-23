@@ -1,6 +1,7 @@
 class PasswordsController < ApplicationController
-  allow_unauthenticated_access
-  before_action :set_user_by_token, only: %i[ edit update ]
+  allow_unauthenticated_access only: %i[ create ]
+  before_action :set_user_by_token, only: %i[ edit ]
+  before_action :set_user, only: %i[update]
 
   def new
   end
@@ -17,11 +18,17 @@ class PasswordsController < ApplicationController
   end
 
   def update
-    if @user.update(params.permit(:password, :password_confirmation))
-      redirect_to new_session_path, notice: "Password has been reset."
+    if User.authenticate_by({ email_address: @user.email_address, password: params[:password][:current_password] })
+      if @user.update({ password: params[:password][:new_password], password_confirmation: params[:password][:new_password_confirmation] })
+        render json: { message: "Password updated" }, status: :ok
+      else
+        render json: { message: "Passwords do not match" }, status: :unprocessable_entity
+      end
     else
-      redirect_to edit_password_path(params[:token]), alert: "Passwords did not match."
+      render json: { message: "Password incorrect" }, status: :unprocessable_entity
     end
+  rescue ActiveRecord::RecordInvalid => e
+    render json: { errors: e.record.errors.full_messages }, status: unprocessable_entity
   end
 
   private
@@ -29,5 +36,13 @@ class PasswordsController < ApplicationController
       @user = User.find_by_password_reset_token!(params[:token])
     rescue ActiveSupport::MessageVerifier::InvalidSignature
       redirect_to new_password_path, alert: "Password reset link is invalid or has expired."
+    end
+
+    def set_user
+      @user = Current.user
+    end
+
+    def update_password_params
+      params.permit(:current_password, :new_password, :new_password_confirmation)
     end
 end
