@@ -16,6 +16,16 @@
             />
           </div>
         </div>
+        <div class="rounded-md shadow-sm -space-y-px">
+          <div>
+            <input
+              v-model="form.display_name"
+              required
+              class="relative block w-full px-3 py-2 border border-gray-300 rounded-t-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Display Name"
+            />
+          </div>
+        </div>
         <div>
           <button
             type="submit"
@@ -41,6 +51,7 @@ const authStore = useAuthStore()
 
 const form = reactive({
   email_address: '',
+  display_name: '',
 })
 let loading = false
 
@@ -63,7 +74,8 @@ const updateUser = async () => {
 onMounted(async () => {
   try {
     await authStore.fetchCurrentUser()
-    form.email_address = authStore.user?.email_address || ''
+    ;(form.email_address = authStore.user?.email_address || ''),
+      (form.display_name = authStore.user?.display_name || '')
   } catch (error) {
     console.error('Failed to fetch user:', error)
   }
